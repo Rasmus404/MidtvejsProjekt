@@ -3,23 +3,14 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.awt.*;
 
 public class Main extends Application {
 
@@ -29,40 +20,49 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         stage.setTitle(" ");
-        stage.setWidth(500);
-        stage.setHeight(500);
+        stage.setWidth(700);
+        stage.setHeight(stage.getWidth() / 1.4);
 
-        TableView scoreboard = new TableView();
-        TableColumn<Hold, String> holdColumn = new TableColumn<>("Hold");
-        holdColumn.setCellValueFactory(new PropertyValueFactory<>("holdNavn"));
-
-        TableColumn<Hold, String> scoreColumn = new TableColumn<>("Score");
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
-
-        TableColumn<Hold, String> placeringColumn = new TableColumn<>("Placering");
-        placeringColumn.setCellValueFactory(new PropertyValueFactory<>("placering"));
-
-        scoreboard.getColumns().add(holdColumn);
-        scoreboard.getColumns().add(scoreColumn);
-        scoreboard.getColumns().add(placeringColumn);
-
-        scoreboard.getItems().add(new Hold("Randers MiniScooters", "0", "2"));
-        scoreboard.getItems().add(new Hold("Herning MiniPut", "0", "1"));
-        VBox scoreboardHolder = new VBox(scoreboard);
+        ScoreboardCenter scoreboardCenter = new ScoreboardCenter();
+        KommendeKampCenter kommendeKampCenter = new KommendeKampCenter();
+        KampHistorikCenter kampHistorikCenter = new KampHistorikCenter();
+        KampSkærmCenter kampSkærmCenter = new KampSkærmCenter();
 
 
         VBox leftBorder = new VBox();
         Button b1 = new Button("One");
-        leftBorder.setPrefWidth(100);
+        leftBorder.setPrefWidth(stage.getWidth() / 5.4);
         leftBorder.setStyle("-fx-background-color: #336699;");
+        leftBorder.setAlignment(Pos.TOP_CENTER);
+        leftBorder.setPadding(new Insets(5, 5, 5, 5));
+        Button tilmeldHoldButton = new Button("Tilmeld hold");
+        Button opretKampButton = new Button("Opret Kamp");
+        Button startKampButton = new Button("Start Kamp");
+
+        //startKampButton.setOnAction(e -> beginKampSkærm);
+
+        tilmeldHoldButton.setPrefWidth(leftBorder.getPrefWidth() / 1.1);
+        opretKampButton.setPrefWidth(tilmeldHoldButton.getPrefWidth());
+        startKampButton.setPrefWidth(tilmeldHoldButton.getPrefWidth());
+        leftBorder.setSpacing(15);
+        leftBorder.getChildren().addAll(tilmeldHoldButton, opretKampButton, startKampButton);
 
 
         VBox rightBorder = new VBox();
-        Button pointTavleButton = new Button("Point Tavle");
-        rightBorder.getChildren().addAll(pointTavleButton);
-        rightBorder.setPrefWidth(100);
+        rightBorder.setPrefWidth(stage.getWidth() / 5.4);
         rightBorder.setStyle("-fx-background-color: #336699;");
+        rightBorder.setAlignment(Pos.TOP_CENTER);
+        rightBorder.setPadding(new Insets(5, 5, 5, 5));
 
+        Button pointTavleButton = new Button("Point Tavle");
+        Button kommendeKampeButton = new Button("Kommende Kampe");
+        Button kampHistorikButton = new Button("Kamp Historik");
+
+        pointTavleButton.setPrefWidth(rightBorder.getPrefWidth() / 1.1);
+        kommendeKampeButton.setPrefWidth(pointTavleButton.getPrefWidth());
+        kampHistorikButton.setPrefWidth(pointTavleButton.getPrefWidth());
+        rightBorder.setSpacing(15);
+        rightBorder.getChildren().addAll(pointTavleButton, kommendeKampeButton, kampHistorikButton);
 
 
         Text miniPutLigaText = new Text("Miniput Liga");
@@ -73,16 +73,23 @@ public class Main extends Application {
         VBox topBorder = new VBox(miniPutLigaText, kommendeKampeText);
         topBorder.setAlignment(Pos.CENTER);
 
+
         BorderPane pane = new BorderPane();
         pane.setLeft(leftBorder);
         pane.setRight(rightBorder);
-        pane.setCenter(scoreboardHolder);
+        pane.setCenter(scoreboardCenter.getCenter());
         pane.setTop(topBorder);
 
-        Scene scene = new Scene(pane, 400, 300);
+        pointTavleButton.setOnAction(e -> pane.setCenter(scoreboardCenter.getCenter()));
+        kommendeKampeButton.setOnAction(e -> pane.setCenter(kommendeKampCenter.getCenter()));
+        kampHistorikButton.setOnAction(e -> pane.setCenter(kampHistorikCenter.getCenter()) );
+
+       //startKampButton.setOnAction( e->pane.); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
+
+
+
+        Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
-
-
     }
 }
