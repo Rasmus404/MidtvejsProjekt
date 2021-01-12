@@ -26,7 +26,7 @@ public class Main extends Application {
         ScoreboardCenter scoreboardCenter = new ScoreboardCenter();
         KommendeKampCenter kommendeKampCenter = new KommendeKampCenter();
         KampHistorikCenter kampHistorikCenter = new KampHistorikCenter();
-        KampSkærmCenter kampSkærmCenter = new KampSkærmCenter();
+        KampSkaermCenter kampSkaermCenter = new KampSkaermCenter();
 
 
         VBox leftBorder = new VBox();
@@ -83,10 +83,9 @@ public class Main extends Application {
         pointTavleButton.setOnAction(e -> pane.setCenter(scoreboardCenter.getCenter()));
         kommendeKampeButton.setOnAction(e -> pane.setCenter(kommendeKampCenter.getCenter()));
         kampHistorikButton.setOnAction(e -> pane.setCenter(kampHistorikCenter.getCenter()) );
+        startKampButton.setOnAction( e->pane.setCenter(kampSkaermCenter.getCenter())); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
 
-       //startKampButton.setOnAction( e->pane.); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
-
-
+        // Rasmus må gerne lave resten selv :)
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);

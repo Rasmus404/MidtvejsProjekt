@@ -35,6 +35,7 @@ public class ScoreboardCenter implements CenterClassInterface{
 
         scoreboard.getItems().add(new Hold("Randers MiniScooters", "0", "2"));
         scoreboard.getItems().add(new Hold("Herning MiniPut", "3", "1"));
+
         VBox scoreboardHolder = new VBox(scoreboard);
         return scoreboardHolder;
     }

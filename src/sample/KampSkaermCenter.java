@@ -3,7 +3,7 @@ package sample;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-public class KampSkærmCenter implements CenterClassInterface{
+public class KampSkaermCenter implements CenterClassInterface{
 
 
     @Override
