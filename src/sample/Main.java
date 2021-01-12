@@ -82,10 +82,10 @@ public class Main extends Application {
 
         pointTavleButton.setOnAction(e -> pane.setCenter(scoreboardCenter.getCenter()));
         kommendeKampeButton.setOnAction(e -> pane.setCenter(kommendeKampCenter.getCenter()));
-        kampHistorikButton.setOnAction(e -> pane.setCenter(kampHistorikCenter.getCenter()) );
+        kampHistorikButton.setOnAction(e -> pane.setCenter(kampHistorikCenter.getCenter()));
         startKampButton.setOnAction( e->pane.setCenter(kampSkaermCenter.getCenter())); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
 
-        // Rasmus må gerne lave resten selv :)
+
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);

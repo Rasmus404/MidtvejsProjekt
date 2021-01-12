@@ -29,12 +29,14 @@ public class ScoreboardCenter implements CenterClassInterface{
         scoreColumn.prefWidthProperty().bind(scoreboard.widthProperty().divide(4));
         placeringColumn.prefWidthProperty().bind(scoreboard.widthProperty().divide(4.1));
 
-       // scoreboard.sort(scoreColumn);
-        //scoreboard.getSortOrder().add(scoreColumn);
-
 
         scoreboard.getItems().add(new Hold("Randers MiniScooters", "0", "2"));
         scoreboard.getItems().add(new Hold("Herning MiniPut", "3", "1"));
+        //scoreboard.getItems().add(getHoldDB); // maybe
+
+
+        scoreboard.getSortOrder().add(placeringColumn);
+        scoreboard.sort();
 
         VBox scoreboardHolder = new VBox(scoreboard);
         return scoreboardHolder;
