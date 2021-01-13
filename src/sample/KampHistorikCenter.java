@@ -38,7 +38,7 @@ public class KampHistorikCenter implements CenterClassInterface{
         udeholdColumn.prefWidthProperty().bind(kommendeKampe.widthProperty().divide(3));
 
 
-        kommendeKampe.getItems().add(new Kamp("Randers MiniScooters", "Herning Miniput", LocalDate.now().plusDays(1), LocalTime.parse("15:30")));
+        kommendeKampe.getItems().add(new Kamp("Randers MiniScooters", "Herning Miniput", LocalDate.now().minusDays(100), LocalTime.parse("15:30")));
 
         VBox kommendeKampeHolder = new VBox(kommendeKampe);
         return kommendeKampeHolder;

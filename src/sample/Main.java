@@ -3,22 +3,26 @@ package sample;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+    private Stage stage;
     public static void main(String[] args) {
         launch(args);
     }
 
     public void start(Stage stage) {
+        this.stage = stage;
         stage.setTitle(" ");
         stage.setWidth(700);
         stage.setHeight(stage.getWidth() / 1.4);
@@ -26,11 +30,11 @@ public class Main extends Application {
         ScoreboardCenter scoreboardCenter = new ScoreboardCenter();
         KommendeKampCenter kommendeKampCenter = new KommendeKampCenter();
         KampHistorikCenter kampHistorikCenter = new KampHistorikCenter();
-        KampSkaermCenter kampSkaermCenter = new KampSkaermCenter();
-
+        KampSkaermCenter kampSkaermPopOp = new KampSkaermCenter();
+        TilmeldHoldCenter tilmeldHoldCenter = new TilmeldHoldCenter();
+        OpretKampCenter opretKampCenter = new OpretKampCenter();
 
         VBox leftBorder = new VBox();
-        Button b1 = new Button("One");
         leftBorder.setPrefWidth(stage.getWidth() / 5.4);
         leftBorder.setStyle("-fx-background-color: #336699;");
         leftBorder.setAlignment(Pos.TOP_CENTER);
@@ -83,12 +87,28 @@ public class Main extends Application {
         pointTavleButton.setOnAction(e -> pane.setCenter(scoreboardCenter.getCenter()));
         kommendeKampeButton.setOnAction(e -> pane.setCenter(kommendeKampCenter.getCenter()));
         kampHistorikButton.setOnAction(e -> pane.setCenter(kampHistorikCenter.getCenter()));
-        startKampButton.setOnAction( e->pane.setCenter(kampSkaermCenter.getCenter())); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
+        startKampButton.setOnAction( e-> kampskaerm(kampSkaermPopOp.getKampSkaerm())); // evt. lave Pop op eller ændre hele vinduet(Left, Center, Right : knapper og tid) (Top : Hjemme vs ude)
+        tilmeldHoldButton.setOnAction(e -> pane.setCenter(tilmeldHoldCenter.getCenter()));
+        opretKampButton.setOnAction(e -> pane.setCenter(opretKampCenter.getCenter()));
+
+
+
+
 
 
 
         Scene scene = new Scene(pane);
         stage.setScene(scene);
         stage.show();
+    }
+    private void kampskaerm(Node kampSkaermHolder) {
+        Stage kampPop = new Stage();
+        kampPop.initOwner(stage);
+        kampPop.initModality(Modality.APPLICATION_MODAL);
+        GridPane kampGrid = new GridPane();
+        kampGrid.getChildren().add(kampSkaermHolder);
+        Scene kampScene = new Scene(kampGrid, 600, 400);
+        kampPop.setScene(kampScene);
+        kampPop.show();
     }
 }
