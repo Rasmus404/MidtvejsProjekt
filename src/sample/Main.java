@@ -14,7 +14,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 public class Main extends Application {
     private Stage stage;
     public static void main(String[] args) {
@@ -36,7 +35,7 @@ public class Main extends Application {
 
         VBox leftBorder = new VBox();
         leftBorder.setPrefWidth(stage.getWidth() / 5.4);
-        leftBorder.setStyle("-fx-background-color: #336699;");
+        leftBorder.setStyle("-fx-background-color: #87CEFA;");
         leftBorder.setAlignment(Pos.TOP_CENTER);
         leftBorder.setPadding(new Insets(5, 5, 5, 5));
         Button tilmeldHoldButton = new Button("Tilmeld hold");
@@ -54,7 +53,7 @@ public class Main extends Application {
 
         VBox rightBorder = new VBox();
         rightBorder.setPrefWidth(stage.getWidth() / 5.4);
-        rightBorder.setStyle("-fx-background-color: #336699;");
+        rightBorder.setStyle("-fx-background-color: #87CEFA;");
         rightBorder.setAlignment(Pos.TOP_CENTER);
         rightBorder.setPadding(new Insets(5, 5, 5, 5));
 
