@@ -1,12 +1,23 @@
-package sample;
+package logic;
 
 public class Hold {
 
-    private String holdNavn = null;
-    private String score = null;
-    private String placering = null;
+    private int hold_id;
+    private String holdNavn;
+    private int score;
+    private int placering;
 
-    public Hold() {
+   /* public Hold (String holdNavn) {
+
+        this.holdNavn = holdNavn;
+    }*/
+
+    public int getId() {
+        return hold_id;
+    }
+
+    public void setId(int hold_id) {
+        this.hold_id = hold_id;
     }
 
     public Hold(String holdNavn, String score, String placering) {

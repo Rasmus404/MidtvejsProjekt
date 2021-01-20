@@ -1,15 +1,20 @@
 package sample;
 
+import Datalayer.DataLayer;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import logic.Kamp;
 
 
+//lave logic som fortæller hvilke kampe der skal i tableview
+// hente Kampe fra SQL tabel
 public class KommendeKampCenter implements CenterClassInterface{
+
+    DataLayer DL = new DataLayer("HoldDB");
+
 
     @Override
     public Node getCenter() {
@@ -40,7 +45,7 @@ public class KommendeKampCenter implements CenterClassInterface{
         udeholdColumn.prefWidthProperty().bind(kommendeKampe.widthProperty().divide(3));
 
 
-        kommendeKampe.getItems().add(new Kamp("Randers MiniScooters", "Herning Miniput", LocalDate.now().plusDays(100), LocalTime.parse("15:30")));
+       // kommendeKampe.getItems().add(new Kamp("Randers MiniScooters", "Herning Miniput", LocalDate.now().plusDays(100), LocalTime.parse("15:30")));
 
         VBox kommendeKampeHolder = new VBox(kommendeKampe);
         return kommendeKampeHolder;

@@ -1,5 +1,6 @@
 package sample;
 
+import Datalayer.DataLayer;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -7,6 +8,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 public class ScoreboardCenter implements CenterClassInterface{
+
+    DataLayer DL = new DataLayer("HoldDB");
     @Override
     public Node getCenter() {
         TableView scoreboard = new TableView();

@@ -14,6 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+// opret SQL tables
+// opret JDBC metoder
 public class Main extends Application {
     private Stage stage;
     public static void main(String[] args) {

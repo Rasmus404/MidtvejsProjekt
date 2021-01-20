@@ -1,30 +1,40 @@
 package sample;
 
+import Datalayer.DataLayer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import logic.Kamp;
+
+import java.time.LocalDate;
+
+
+// JDBC metoder linket til Kampe
+
 
 public class OpretKampCenter implements CenterClassInterface {
+
+    DataLayer DL = new DataLayer("HoldDB");
 
     @Override
     public Node getCenter() {
 
-        TextField hjemmehold = new TextField();
-        hjemmehold.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        hjemmehold.setFocusTraversable(false);
-        hjemmehold.setPromptText("Hjemmehold");
+        ObservableList<String> holdOptions = FXCollections.observableArrayList();
+        holdOptions.addAll(DL.getALLHoldNavne());
 
+        ComboBox hjemmeValg = new ComboBox(holdOptions);
 
-        TextField udehold = new TextField();
-        udehold.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        udehold.setFocusTraversable(false);
-        udehold.setPromptText("Udehold");
+        ComboBox udeValg = new ComboBox(holdOptions);
 
 
         TextField tidspunkt = new TextField();
@@ -32,35 +42,53 @@ public class OpretKampCenter implements CenterClassInterface {
         tidspunkt.setFocusTraversable(false);
         tidspunkt.setPromptText("Tidspunkt");
 
+        DatePicker datepicker = new DatePicker();
+        {
 
-        TextField dato = new TextField();
-        dato.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        dato.setFocusTraversable(false);
-        dato.setPromptText("Dato");
-
-        Button opret = new Button("Tilmeld");
-        opret.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+            Button opret = new Button("Opret");
+            opret.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
 
 
+            opret.setOnAction(e ->
+                    DL.addKamp(tilmed(
+                            hjemmeValg.getValue().toString(),
+                            udeValg.getValue().toString(),
+                            datepicker.getValue(),
+                            tidspunkt.getText()
+                    )));
 
 
-
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(20, 20, 20, 20));
-        grid.add(hjemmehold, 1, 1);
-        grid.add(udehold, 1, 2);
-        grid.add(tidspunkt, 1, 3);
-        grid.add(dato, 1, 4);
-        grid.add(opret, 1,5);
-        grid.setVgap(10);
-
+            GridPane grid = new GridPane();
+            grid.setPadding(new Insets(20, 20, 20, 20));
+            grid.add(hjemmeValg, 1, 1);
+            grid.add(udeValg, 1, 2);
+            grid.add(tidspunkt, 1, 3);
+            grid.add(datepicker, 1, 4);
+            grid.add(opret, 1, 5);
+            grid.setVgap(10);
 
 
-        HBox opretkamp = new HBox(grid);
+            HBox opretkamp = new HBox(grid);
 
-        opretkamp.setAlignment(Pos.CENTER);
+            opretkamp.setAlignment(Pos.CENTER);
 
 
-        return opretkamp;
+            return opretkamp;
+
+        }
     }
+        private Kamp tilmed(String hjemmehold, String udehold, LocalDate dato, String tidspunkt){
+
+            String sStamp = dato.toString()+  " "  + tidspunkt;
+
+
+
+            Kamp kamp = new Kamp(DL.getHoldByHoldNavn(hjemmehold), DL.getHoldByHoldNavn(udehold), sStamp);
+
+            return kamp;
+        }
+
 }
+
+
+

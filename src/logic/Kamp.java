@@ -1,4 +1,4 @@
-package sample;
+package logic;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,8 +6,11 @@ import java.time.LocalTime;
 public class Kamp {
 
 
-    String hjemmehold;
-    String udehold;
+
+
+    int kamp_id;
+    Hold hjemmehold;
+    Hold udehold;
     LocalDate dato;
     LocalTime tidspunkt;
 
@@ -18,7 +21,15 @@ public class Kamp {
         this.tidspunkt = tidspunkt;
     }
 
-    public String getHjemmehold() {
+    public int getId() {
+        return kamp_id;
+    }
+
+    public void setId(int kamp_id) {
+        this.kamp_id = kamp_id;
+    }
+
+    public Hold getHjemmehold() {
         return hjemmehold;
     }
 
@@ -50,10 +61,21 @@ public class Kamp {
         this.tidspunkt = tidspunkt;
     }
 
+    public String getTimeStamp() {
+        return timeStamp;
+    }
 
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Kamp{" +
+                "hjemmehold='" + hjemmehold + '\'' +
+                ", udehold='" + udehold + '\'' +
+                ", dato=" + dato +
+                ", tidspunkt=" + tidspunkt +
+                '}';
+    }
 }
